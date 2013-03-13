@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngr-vT-hXC">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="dWn-PZ-FyX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Options">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="options" destination="2" eventType="touchUpInside" id="4dh-5B-DW7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6g-el-D0X">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="Cwy-uG-Ayq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK4-TJ-tYX">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="PYv-n1-xnb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGameBoard" destination="2" eventType="touchUpInside" id="UZv-PG-bxE"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBv-Qt-Tvk"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="NBv-Qt-Tvk" secondAttribute="bottom" constant="-2" id="1hR-ho-lYN"/>
+                            <constraint firstItem="NBv-Qt-Tvk" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="3PF-gF-pXY"/>
+                            <constraint firstItem="t6g-el-D0X" firstAttribute="bottom" secondItem="Ngr-vT-hXC" secondAttribute="bottom" type="default" id="EZb-Wp-DmV"/>
+                            <constraint firstItem="MK4-TJ-tYX" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="10" id="I2y-kh-u7t"/>
+                            <constraint firstItem="t6g-el-D0X" firstAttribute="baseline" secondItem="Ngr-vT-hXC" secondAttribute="baseline" type="default" id="IsA-Jt-OCD"/>
+                            <constraint firstItem="MK4-TJ-tYX" firstAttribute="baseline" secondItem="t6g-el-D0X" secondAttribute="baseline" type="default" id="Owo-3K-5Ay"/>
+                            <constraint firstItem="NBv-Qt-Tvk" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="U2d-N3-X0u"/>
+                            <constraint firstItem="NBv-Qt-Tvk" firstAttribute="top" secondItem="3" secondAttribute="top" constant="60" id="Whd-7e-oqg"/>
+                            <constraint firstItem="MK4-TJ-tYX" firstAttribute="top" secondItem="3" secondAttribute="top" constant="6" id="dky-2g-Ix7"/>
+                            <constraint firstAttribute="trailing" secondItem="Ngr-vT-hXC" secondAttribute="trailing" constant="7" id="eU2-6o-a7A"/>
+                            <constraint firstItem="MK4-TJ-tYX" firstAttribute="bottom" secondItem="t6g-el-D0X" secondAttribute="bottom" type="default" id="k5q-Qx-xnd"/>
+                            <constraint firstItem="MK4-TJ-tYX" firstAttribute="top" secondItem="t6g-el-D0X" secondAttribute="top" type="default" id="pJc-Yg-RLK"/>
+                            <constraint firstItem="NBv-Qt-Tvk" firstAttribute="centerX" secondItem="t6g-el-D0X" secondAttribute="centerX" type="default" id="pt3-b4-4A5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QMy-KW-uhY"/>
+                    <connections>
+                        <outlet property="boardScroller" destination="NBv-Qt-Tvk" id="8l5-Ay-niU"/>
+                        <outlet property="clock" destination="t6g-el-D0X" id="d50-5f-VaI"/>
+                        <outlet property="optionsButton" destination="Ngr-vT-hXC" id="f5h-w7-aQ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="45" y="183"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="newGameBoard"/>
+                <relationship kind="action" name="options"/>
+                <relationship kind="outlet" name="boardScroller" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="clock" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
