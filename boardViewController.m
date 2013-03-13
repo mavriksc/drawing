@@ -21,6 +21,7 @@
     self = [super init];
     if (self) {
         _bd= [[board alloc] initWithWidth:w andHeight:h andMines:m];
+       // NSLog(@"data size %i",_bd.data.count);
         tileView *tv;
         for (int i=0; i<self.bd.rows*self.bd.cols; i++) {
             int row,col;

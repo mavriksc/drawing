@@ -13,7 +13,6 @@
 -(void)decSafeTiles
 {
     _safeTilesLeft--;
-    //NSLog(@"%i",self.safeTilesLeft);
 }
 -(NSString *)valueForIndex:(int)i
 {
@@ -30,7 +29,7 @@
 }
 -(CGPoint)pointForIndex:(int)i{
     //returns a point in a 2darray from an index
-    return CGPointMake(i%_cols, i/_rows);
+    return CGPointMake(i%_cols, i/_cols);
 }
 
 
