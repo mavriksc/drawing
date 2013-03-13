@@ -88,7 +88,43 @@
         //not skipping this when 0???? !!FIXED!! stupid stirng compare
         if (![self.value isEqualToString:@"0"]) {
             //NSLog(@"%@",self.value);
-            CGContextSetRGBFillColor(context, 0, 0, 0, 1);
+            switch ([self.value integerValue]) {
+                case 1:
+                    CGContextSetRGBFillColor(context, 0, 1, 0, 1);
+                    break;
+                
+                case 2:
+                    CGContextSetRGBFillColor(context, 0, 0, 1, 1);
+                    break;
+                case 3:
+                    CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+                    break;
+                    
+                case 4:
+                    CGContextSetRGBFillColor(context, 0, 0.5, 0.5, 1);
+                    break;
+                case 5:
+                    CGContextSetRGBFillColor(context, 0.5, 0, 0.5, 1);
+                    break;
+                    
+                case 6:
+                    CGContextSetRGBFillColor(context, 0.2, 0.8, 0.5, 1);
+                    break;
+                case 7:
+                    CGContextSetRGBFillColor(context, 0.2, 0.5, 0.8, 1);
+                    break;
+                    
+                case 8:
+                    CGContextSetRGBFillColor(context, 0.8, 0.2, 0.5, 1);
+                    break;
+                
+                case 9:
+                    CGContextSetRGBFillColor(context, 0.5, 0.5, 0, 1);
+                    break;
+                default:
+                    break;
+            }
+            
             [self.value drawAtPoint:CGPointMake(10, 5) withFont:[UIFont fontWithName:@"AppleGothic" size:50]];
         }
        
