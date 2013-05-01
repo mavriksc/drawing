@@ -1,0 +1,152 @@
+// Standard board sizes:
+//  Small = 9x9 @ 10 mines
+//  Noraml = 16x16 @ 40 mines
+//  Expert = 16x30 @ 99 mines
+
+// mineRow = int:00-000000000000000000000000000000 (30 out-of 32 bits)
+// 0 = no mine
+// 1 = mine
+
+// zeroRow = int:00-000000000000000000000000000000 (30 out-of 32 bits)
+// 0 = no mines nearby
+// 1 = at least one mine nearby
+
+// revealRow = int:00-000000000000000000000000000000 (30 out-of 32 bits)
+// 0 = not revealed
+// 1 = revealed
+
+// fields of the Board object
+int _rows, _cols, _numMines, _safeTiles;
+int[] _mineRows = new int[_rows]; // int array of size [_rows]
+int[] _zeroRows = new int[_rows]; // int array of size [_rows]
+int[] _revealRows = new int[_rows]; // int array of size [_rows]
+
+// Result: Sets up the game board based on # of rows [_rows], # of columns [_cols], and # of mines [_numMines].
+// A game board is made up of mine locations, zero locations, and tiles that have been revealed/not revealed.
+void createBoard()
+{
+    _safeTiles = _rows * _cols - _numMines;
+    
+    for (int i = 0; i < _numMines; i++)
+    {
+        // Randomize mine locations (row, col)
+        int row = Rand(0, _rows - 1); // Generate a random number between [0] and [_rows - 1] inclusively
+        int col = Rand(0, _cols - 1); // Generate a random number between [0] and [_cols - 1] inclusively
+        
+        // Check if a mine at that loc already exists
+        if (_mineRows[row] >> col & 1 == 1)
+            i--;
+        else
+            _mineRows[row] |= 1 << col;
+    }
+    
+    // Calculate locations of ZERO tiles
+    _zeroRows[0] |= 
+          _mineRows[0]          // Center
+        | (_mineRows[0] << 1)   // Center-Right
+        | (_mineRows[0] >> 1)   // Center-Left
+        | _mineRows[1]          // Bot
+        | (_mineRows[1] << 1)   // Bot-Right
+        | (_mineRows[1] >> 1)   // Bot-Left
+    
+    for (int i = 1; i < _rows - 2; i++)
+    {
+        _zeroRows[i] |= 
+              _mineRows[i]              // Center
+            | (_mineRows[i] << 1)       // Center-Right
+            | (_mineRows[i] >> 1)       // Center-Left
+            | _mineRows[i - 1]          // Top
+            | (_mineRows[i - 1] << 1)   // Top-Right
+            | (_mineRows[i - 1] >> 1)   // Top-Left
+            | _mineRows[i + 1]          // Bot
+            | (_mineRows[i + 1] << 1)   // Bot-Right
+            | (_mineRows[i + 1] >> 1)   // Bot-Left
+    }
+    
+    _zeroRows[_rows - 1] |=
+          _mineRows[_rows - 1]          // Center
+        | (_mineRows[_rows - 1] << 1)   // Center-Right
+        | (_mineRows[_rows - 1] >> 1)   // Center-Left
+        | _mineRows[_rows - 2]          // Top
+        | (_mineRows[_rows - 2] << 1)   // Top-Right
+        | (_mineRows[_rows - 2] >> 1);  // Top-Left
+}
+
+// This function is called when the user clicks a tile
+// tileView lastTile = [tile that was pressed]
+void touchesEnded()
+{
+    // If mine exists at location
+    if (_mineRows[lastTile.row] >> lastTile.col & 1 == 1)
+        gameOver(false);
+    else
+        revealTiles(lastTile.row, lastTile.col);
+    
+    if (_safeTiles == 0)
+        gameOver(true);
+}
+
+// Input: The location of a tile on row [row] and column [col].
+// Result: Reveals the tile at the location and recursively reveals surrounding tiles as necessary.
+void revealTiles(int row, int col)
+{
+    // If location is out of bounds, skip this tile
+    if (row < 0 || row >= _rows || col < 0 || col >= _cols)
+        return;
+    
+    // If location is already revealed, skip this tile
+    if (_revealRows[row] >> col & 1 == 1)
+        return;
+    
+    // Reveal the tile
+    _safeTiles--;
+    _revealRows[row] |= 1 << col;
+    
+    int indexOfTile = row * _cols + col;
+    _tiles[indexOfTile].reveal();
+    
+    // If location is a zero, recurse for nearby tiles
+    if (_zeroRows[row] >> col & 1 == 1)
+    {
+        revealTiles(row - 1, col - 1);
+        revealTiles(row - 1, col);
+        revealTiles(row - 1, col + 1);
+        revealTiles(row, col - 1);
+        revealTiles(row, col + 1);
+        revealTiles(row + 1, col - 1);
+        revealTiles(row + 1, col);
+        revealTiles(row + 1, col + 1);
+    }
+}
+
+// Input: The location of a tile on row [row] and column [col].
+// Returns: The number of mines in the 8~ surrounding tiles of the location.
+int minesNearby(int row, int col)
+{
+    int count = 0;
+
+    if (row > 0)
+    {
+        count += _mineRows[row - 1] >> col & 1;
+        if (col > 0)
+            count += _mineRows[row - 1] >> (col - 1) & 1;
+        if (col < _cols - 1)
+            count += _mineRows[row - 1] >> (col + 1) & 1;
+    }
+
+    if (row < _rows - 1)
+    {
+        count += _mineRows[row + 1] >> col & 1;
+        if (col > 0)
+            count += _mineRows[row + 1] >> (col - 1) & 1;
+        if (col < _cols - 1)
+            count += _mineRows[row + 1] >> (col + 1) & 1;
+    }
+
+    if (col > 0)
+        count += _mineRows[row] >> (col - 1) & 1;
+    if (col < _cols - 1)
+        count += _mineRows[row] >> (col + 1) & 1;
+
+    return count;
+} 
